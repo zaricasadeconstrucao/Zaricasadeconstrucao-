@@ -1,0 +1,655 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zari Casa de Construção | Materiais de Construção e Acabamentos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        zari: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-image: radial-gradient(rgba(245, 158, 11, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .toast-enter {
+            animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .toast-exit {
+            animation: slideOutRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-zari-500 selection:text-slate-950">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3.5 group">
+                <div class="w-12 h-12 bg-gradient-to-tr from-zari-600 via-zari-500 to-amber-300 rounded-2xl flex items-center justify-center text-slate-950 shadow-lg shadow-zari-500/20 group-hover:scale-105 transition-all duration-300">
+                    <i class="fa-solid fa-helmet-safety text-xl font-bold"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900 block leading-none">ZARI</span>
+                    <span class="text-[11px] font-extrabold tracking-widest text-zari-600 uppercase mt-0.5 block">Casa de Construção</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-sm text-slate-600">
+                <a href="#inicio" class="hover:text-zari-600 transition-colors py-2">Início</a>
+                <a href="#destaques" class="hover:text-zari-600 transition-colors py-2">Vantagens</a>
+                <a href="#produtos" class="hover:text-zari-600 transition-colors py-2">Produtos & Preços</a>
+                <a href="#sobre" class="hover:text-zari-600 transition-colors py-2">Sobre Nós</a>
+                <a href="#orcamento" class="hover:text-zari-600 transition-colors py-2">Orçamento Rápido</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCart()" class="relative p-3 rounded-2xl bg-slate-100 hover:bg-zari-100 text-slate-700 hover:text-zari-700 transition-all duration-300 shadow-sm group" aria-label="Carrinho">
+                    <i class="fa-solid fa-cart-shopping text-base group-hover:scale-110 transition-transform"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-zari-600 text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 px-6 py-4 space-y-3 shadow-xl">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-semibold border-b border-slate-50">Início</a>
+            <a href="#destaques" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-semibold border-b border-slate-50">Vantagens</a>
+            <a href="#produtos" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-semibold border-b border-slate-50">Produtos & Preços</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-semibold border-b border-slate-50">Sobre Nós</a>
+            <a href="#orcamento" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 font-semibold">Orçamento Rápido</a>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-24 lg:py-36 overflow-hidden hero-pattern">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-zari-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-bold bg-gradient-to-r from-zari-500/20 to-amber-500/20 text-zari-400 border border-zari-500/30 shadow-inner">
+                        <i class="fa-solid fa-star text-amber-400"></i> Excelência em Materiais de Construção e Acabamento
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                        Construa seus sonhos com <span class="text-transparent bg-clip-text bg-gradient-to-r from-zari-400 via-amber-300 to-amber-100">qualidade e economia.</span>
+                    </h1>
+                    <p class="text-lg text-slate-300 max-w-2xl font-normal leading-relaxed">
+                        Tudo o que sua obra precisa do alicerce ao acabamento fino. Produtos certificados, entrega rápida com frota própria e atendimento técnico personalizado.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="#produtos" class="px-8 py-4 bg-gradient-to-r from-zari-500 to-zari-600 hover:from-zari-600 hover:to-zari-700 text-slate-950 font-extrabold rounded-2xl shadow-xl shadow-zari-500/20 transition-all transform hover:-translate-y-1 flex items-center gap-3">
+                            <span>Ver Catálogo de Preços</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#orcamento" class="px-8 py-4 bg-slate-900/80 hover:bg-slate-800 text-white font-bold rounded-2xl border border-slate-700 hover:border-zari-500/50 transition-all backdrop-blur flex items-center gap-3">
+                            <i class="fa-solid fa-file-invoice-dollar text-zari-400"></i>
+                            <span>Solicitar Orçamento</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative animate-float">
+                    <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-zari-500 to-amber-300 opacity-20 blur-2xl"></div>
+                    <div class="relative bg-slate-900/90 border border-slate-800/80 rounded-3xl p-8 shadow-2xl backdrop-blur-xl">
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-zari-500/20 text-zari-400 flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-bolt"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-white text-sm">Cotação Rápida</h3>
+                                        <p class="text-xs text-slate-400">Resposta em até 10 minutos</p>
+                                    </div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Online</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-zari-500 text-slate-950 flex items-center justify-center font-extrabold shrink-0">
+                                        <i class="fa-solid fa-truck-fast"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white">Entrega Agendada</h4>
+                                        <p class="text-xs text-slate-400">Frota própria equipada para sua segurança</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60 flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-extrabold shrink-0">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white">Marcas Homologadas</h4>
+                                        <p class="text-xs text-slate-400">As melhores marcas do mercado nacional</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="#produtos" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-sm border border-slate-700 transition-all flex items-center justify-center gap-2">
+                                <span>Explorar Todos os Setores</span>
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="destaques" class="py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-zari-600 font-extrabold tracking-wider uppercase text-xs bg-zari-50 px-3.5 py-1.5 rounded-full border border-zari-200">Diferenciais Zari</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Por que escolher a nossa casa de construção?</h2>
+                <p class="text-slate-600 text-sm sm:text-base">Combinamos atendimento humanizado e preço justo para garantir o sucesso da sua reforma ou construção.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-zari-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-zari-500 group-hover:text-slate-950 transition-all shadow-sm">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-lg mb-2">Entrega Expressa</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Frota própria e ágil para levar seus materiais diretamente ao canteiro de obras no horário combinado.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-zari-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-zari-500 group-hover:text-slate-950 transition-all shadow-sm">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-lg mb-2">Melhor Custo-Benefício</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Preços competitivos, condições especiais para grandes volumes e descontos exclusivos à vista.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-zari-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-zari-500 group-hover:text-slate-950 transition-all shadow-sm">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-lg mb-2">Suporte Consultivo</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Nossa equipe técnica auxilia no cálculo de materiais e escolha correta para evitar desperdícios.</p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-zari-400 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-zari-500 group-hover:text-slate-950 transition-all shadow-sm">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-lg mb-2">Qualidade Certificada</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Trabalhamos estritamente com marcas líderes que atendem às normas técnicas brasileiras (ABNT).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produtos" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-zari-600 font-extrabold tracking-wider uppercase text-xs bg-zari-100 px-3.5 py-1.5 rounded-full border border-zari-200">Catálogo & Valores</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 mt-3 mb-4 tracking-tight">Nossos Produtos em Destaque</h2>
+                <p class="text-slate-600 text-sm sm:text-base">Explore nossa vitrine com preços atualizados. Monte seu carrinho e envie sua lista de orçamento em segundos via WhatsApp.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-6 justify-between items-center mb-12">
+                <div class="flex flex-wrap gap-2.5 justify-center lg:justify-start w-full lg:w-auto" id="category-filters">
+                    <button onclick="filterCategory('todos')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-zari-500 text-slate-950 transition-all shadow-md shadow-zari-500/20">Todos</button>
+                    <button onclick="filterCategory('basico')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">Básico</button>
+                    <button onclick="filterCategory('acabamento')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">Acabamento</button>
+                    <button onclick="filterCategory('hidraulica')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">Hidráulica</button>
+                    <button onclick="filterCategory('eletrica')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">Elétrica</button>
+                    <button onclick="filterCategory('ferramentas')" class="cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all">Ferramentas</button>
+                </div>
+
+                <div class="relative w-full lg:w-80">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" oninput="searchProducts()" placeholder="Buscar material..." class="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:border-zari-500 focus:ring-2 focus:ring-zari-500/20 text-sm bg-white font-medium shadow-sm transition-all">
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-zari-600 font-extrabold tracking-wider uppercase text-xs bg-zari-50 px-3.5 py-1.5 rounded-full border border-zari-200">Compromisso & Confiança</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Zari Casa de Construção: O parceiro ideal da sua obra</h2>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        Fundada com o firme propósito de oferecer excelência e economia para engenheiros, arquitetos, mestres de obras e clientes finais, a <strong class="text-slate-900">Zari Casa de Construção</strong> se consolidou como referência absoluta na região.
+                    </p>
+                    <p class="text-slate-600 text-base leading-relaxed">
+                        Trabalhamos em parceria com as maiores marcas do setor para garantir que cada tijolo, saco de cimento e metro de revestimento entregue proporcione total solidez e beleza ao seu projeto.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-slate-900 text-white p-8 sm:p-10 rounded-3xl shadow-2xl space-y-6 relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                            <i class="fa-solid fa-hammer text-9xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Nossos Compromissos</h3>
+                        <ul class="space-y-4 relative z-10">
+                            <li class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-xl bg-zari-500 text-slate-950 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-white block text-base">Estoque Completo e Variado</strong>
+                                    <span class="text-xs text-slate-300">Do bruto ao acabamento sofisticado em um único lugar.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-xl bg-zari-500 text-slate-950 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-white block text-base">Orçamento Transparente</strong>
+                                    <span class="text-xs text-slate-300">Sem taxas surpresa e simulação de frete ágil para sua comodidade.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-xl bg-zari-500 text-slate-950 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <strong class="text-white block text-base">Condições de Pagamento Flexíveis</strong>
+                                    <span class="text-xs text-slate-300">Parcelamento facilitado e descontos especiais em pagamentos à vista.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="orcamento" class="py-24 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 rounded-3xl p-8 sm:p-14 text-white shadow-2xl relative overflow-hidden border border-slate-800">
+                <div class="absolute right-0 bottom-0 opacity-10 translate-x-12 translate-y-12 pointer-events-none">
+                    <i class="fa-solid fa-file-invoice text-9xl"></i>
+                </div>
+                <div class="relative z-10">
+                    <span class="text-zari-400 font-extrabold uppercase text-xs tracking-wider bg-zari-500/20 px-3 py-1.5 rounded-full border border-zari-500/30">Solicitação Personalizada</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold mt-4 mb-3">Tem uma lista de materiais pronta?</h2>
+                    <p class="text-slate-300 mb-8 text-sm sm:text-base">Cole sua lista de materiais ou descreva o que precisa. Nossa equipe comercial fará uma cotação especial com frete e condições exclusivas para você.</p>
+
+                    <form onsubmit="handleQuoteSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-300 mb-2">Seu Nome</label>
+                                <input type="text" id="quote-name" required class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-zari-500 text-sm font-medium shadow-inner" placeholder="Ex: Carlos Silva">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-300 mb-2">Telefone de Contato</label>
+                                <input type="text" id="quote-phone" required class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-zari-500 text-sm font-medium shadow-inner" placeholder="(00) 0000-0000">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-2">Cidade / Bairro da Obra</label>
+                            <input type="text" id="quote-location" required class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-zari-500 text-sm font-medium shadow-inner" placeholder="Ex: Centro, São Paulo - SP">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-300 mb-2">Lista de Materiais ou Observações</label>
+                            <textarea id="quote-details" rows="4" required class="w-full bg-slate-900 border border-slate-700/80 rounded-2xl px-4 py-3.5 text-white placeholder-slate-500 focus:outline-none focus:border-zari-500 text-sm font-medium shadow-inner" placeholder="Descreva os materiais necessários ou cole sua lista aqui..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-zari-500 to-zari-600 hover:from-zari-600 hover:to-zari-700 text-slate-950 font-extrabold rounded-2xl shadow-xl shadow-zari-500/20 transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-paper-plane text-lg"></i>
+                            <span>Enviar Solicitação de Orçamento</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
+                    <div class="w-12 h-12 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Endereço da Loja</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Rua Henrique Correia, 1035 - Casa 1 (Cond. Plaza Residence CD)<br>Bairro Alto, Curitiba - PR<br>CEP: 82840-270</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
+                    <div class="w-12 h-12 bg-zari-100 text-zari-700 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Horário de Funcionamento</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Segunda a Sexta: 07:30 - 18:00<br>Sábado: 08:00 - 14:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-zari-500 text-slate-950 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <h2 class="text-lg font-bold text-slate-900">Carrinho de Orçamento</h2>
+                    </div>
+                    <button onclick="toggleCart()" class="p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-200/50 rounded-xl transition-colors">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Cart items loaded via JS -->
+                </div>
+                <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4 shadow-lg">
+                    <div class="flex justify-between items-center text-base font-bold text-slate-900">
+                        <span>Total Estimado:</span>
+                        <span id="cart-total" class="text-zari-700 text-2xl font-extrabold">R$ 0,00</span>
+                    </div>
+                    <button onclick="checkoutCart()" class="w-full py-4 bg-gradient-to-r from-zari-500 to-zari-600 hover:from-zari-600 hover:to-zari-700 text-slate-950 font-extrabold rounded-2xl shadow-lg shadow-zari-500/20 transition-all flex items-center justify-center gap-2.5">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                        <span>Finalizar Solicitação de Orçamento</span>
+                    </button>
+                    <button onclick="clearCart()" class="w-full py-2 text-xs font-bold text-slate-400 hover:text-red-600 transition-colors">
+                        Esvaziar Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: 'Cimento CP II-Z 50kg', category: 'basico', price: 34.90, unit: 'saco', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Cimento+50kg', desc: 'Cimento Portland ideal para fundações e alvenaria.' },
+            { id: 2, name: 'Areia Média (Metro)', category: 'basico', price: 95.00, unit: 'm³', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Areia+Media', desc: 'Areia lavada ideal para reboco e contrapiso.' },
+            { id: 3, name: 'Brita nº 01 (Metro)', category: 'basico', price: 110.00, unit: 'm³', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Brita+01', desc: 'Brita selecionada para concreto armado e lajes.' },
+            { id: 4, name: 'Tijolo Cerâmico 8 Furos', category: 'basico', price: 1.20, unit: 'un', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Tijolo+8+Furos', desc: 'Alta resistência e isolamento térmico para vedações.' },
+            { id: 5, name: 'Piso Cerâmico Retificado 60x60cm', category: 'acabamento', price: 49.90, unit: 'm²', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Piso+Ceramico', desc: 'Acabamento brilhante de alto padrão para ambientes internos.' },
+            { id: 6, name: 'Argamassa AC-II 20kg', category: 'acabamento', price: 21.50, unit: 'saco', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Argamassa+AC2', desc: 'Indicada para assentamento de pisos e azulejos.' },
+            { id: 7, name: 'Tinta Acrílica Fosca 18L (Branco)', category: 'acabamento', price: 249.90, unit: 'lata', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Tinta+Acritica+18L', desc: 'Excelente cobertura e rendimento superior com ação antimofo.' },
+            { id: 8, name: 'Tubulação PVC Esgoto 100mm (6m)', category: 'hidraulica', price: 68.00, unit: 'barra', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Tubo+PVC+100mm', desc: 'Resistência e durabilidade para sistemas de esgoto.' },
+            { id: 9, name: 'Caixa Dágua 1000L Polietileno', category: 'hidraulica', price: 580.00, unit: 'un', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Caixa+Dagua+1000L', desc: 'Tampa click com vedação total e proteção UV.' },
+            { id: 10, name: 'Fio Flexível 2,5mm² (Rolo 100m)', category: 'eletrica', price: 139.00, unit: 'rolo', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Fio+Flexivel+2.5mm', desc: 'Cobre eletrolítico com isolamento antichamas.' },
+            { id: 11, name: 'Disjuntor Termomagnético 32A', category: 'eletrica', price: 24.90, unit: 'un', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Disjuntor+32A', desc: 'Proteção contra curto-circuito e sobrecarga elétrica.' },
+            { id: 12, name: 'Betoneira 400L 2CV', category: 'ferramentas', price: 3499.00, unit: 'un', image: 'https://placehold.co/400x300/f59e0b/1e293b?text=Betoneira+400L', desc: 'Alta produtividade e robustez para obras de médio e grande porte.' }
+        ];
+
+        let cart = [];
+        let currentCategory = 'todos';
+
+        window.onload = function() {
+            renderProducts(products);
+        };
+
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-16 text-slate-500 font-medium">Nenhum produto encontrado.</div>`;
+                return;
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden bg-slate-100 aspect-video">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/f59e0b/1e293b?text=Zari+Construcao'">
+                            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-extrabold px-3 py-1 rounded-xl uppercase tracking-wider">${product.category}</span>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <h3 class="font-extrabold text-slate-900 text-lg group-hover:text-zari-600 transition-colors">${product.name}</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">${product.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between mt-4">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block font-bold uppercase">Preço por ${product.unit}</span>
+                            <span class="text-xl font-extrabold text-slate-900">R$ ${product.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                        </div>
+                        <button onclick="addToCart(${product.id})" class="p-3.5 bg-zari-500 hover:bg-zari-600 text-slate-950 font-extrabold rounded-2xl transition-all shadow-md shadow-zari-500/20 hover:scale-105 flex items-center justify-center" aria-label="Adicionar ao carrinho">
+                            <i class="fa-solid fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(category) {
+            currentCategory = category;
+            
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = 'cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition-all';
+            });
+            event.target.className = 'cat-btn px-5 py-2.5 rounded-2xl text-sm font-bold bg-zari-500 text-slate-950 transition-all shadow-md shadow-zari-500/20';
+
+            filterAndSearch();
+        }
+
+        function searchProducts() {
+            filterAndSearch();
+        }
+
+        function filterAndSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            
+            let filtered = products.filter(p => {
+                const matchesCategory = currentCategory === 'todos' || p.category === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            renderProducts(filtered);
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+            if (!drawer.classList.contains('hidden')) {
+                renderCartItems();
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartBadge();
+            showToast(`${product.name} adicionado ao carrinho!`, 'success');
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+            }
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-badge').innerText = totalItems;
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-slate-400 font-medium">Seu carrinho está vazio.</div>`;
+                document.getElementById('cart-total').innerText = 'R$ 0,00';
+                return;
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-200/80';
+                div.innerHTML = `
+                    <div class="space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-sm">${item.name}</h4>
+                        <span class="text-xs text-slate-500 font-medium">R$ ${item.price.toFixed(2)} x ${item.quantity} ${item.unit}</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                            <button onclick="updateCartQuantity(${item.id}, -1)" class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-bold">-</button>
+                            <span class="px-2.5 text-xs font-extrabold text-slate-900">${item.quantity}</span>
+                            <button onclick="updateCartQuantity(${item.id}, 1)" class="px-3 py-1.5 text-slate-600 hover:bg-slate-100 font-bold">+</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('cart-total').innerText = `R$ ${total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartBadge();
+            renderCartItems();
+            showToast('Carrinho esvaziado com sucesso.', 'info');
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showToast('Adicione produtos antes de enviar o orçamento.', 'error');
+                return;
+            }
+
+            // Fill quote details textarea with cart items and open section
+            let details = "Itens do Carrinho:\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                const sub = item.price * item.quantity;
+                total += sub;
+                details += `- ${item.quantity} ${item.unit}(s) de ${item.name} (R$ ${sub.toFixed(2)})\n`;
+            });
+
+            details += `\nTotal Estimado: R$ ${total.toFixed(2)}`;
+
+            document.getElementById('quote-details').value = details;
+            toggleCart();
+            
+            const quoteSection = document.getElementById('orcamento');
+            quoteSection.scrollIntoView({ behavior: 'smooth' });
+
+            showToast('Sua lista foi preenchida no formulário. Preencha seus dados para finalizar!', 'info');
+        }
+
+        function handleQuoteSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('quote-name').value;
+
+            showToast(`Obrigado, ${name}! Sua solicitação foi enviada. Nossa equipe entrará em contato em breve.`, 'success');
+            event.target.reset();
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let bgClass = 'bg-slate-900 text-white border-slate-800';
+            let icon = '<i class="fa-solid fa-check text-zari-400"></i>';
+
+            if (type === 'success') {
+                bgClass = 'bg-slate-900 text-white border-zari-500/30';
+                icon = '<i class="fa-solid fa-circle-check text-zari-400"></i>';
+            } else if (type === 'error') {
+                bgClass = 'bg-slate-900 text-white border-red-500/30';
+                icon = '<i class="fa-solid fa-circle-exclamation text-red-400"></i>';
+            } else if (type === 'info') {
+                bgClass = 'bg-slate-900 text-white border-sky-500/30';
+                icon = '<i class="fa-solid fa-circle-info text-sky-400"></i>';
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border ${bgClass} toast-enter font-medium text-sm`;
+            toast.innerHTML = `
+                <div class="text-lg">${icon}</div>
+                <div>${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('toast-enter');
+                toast.classList.add('toast-exit');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
+```
